@@ -1,0 +1,128 @@
+<div class="container">
+    <h1>Student Details</h1>
+    <br><br>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+        <!-- NAMA -->
+        <div class="form-group row">
+            <label for="name" class="col-sm-2">Name: *</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="text" formControlName="name">
+                <!-- Jika error maka muncul -->
+                <div class="alert alert-warning" role="alert" *ngIf="form.controls['name'].touched && !form.controls['name'].valid">
+                    <div *ngIf="form.controls['name'].errors?.required">Atribut nama harus diisi</div>
+                    <div *ngIf="form.controls['name'].errors?.minlength && !form.controls['name'].errors?.pattern">Atribut nama harus minimal 5 karakter</div>
+                    <div *ngIf="form.controls['name'].errors?.maxlength && !form.controls['name'].errors?.pattern">Atribut nama harus maksimal 20 karakter</div>
+                    <div *ngIf="form.controls['name'].errors?.pattern">Nama tak valid</div>
+                </div>
+            </div>
+        </div>
+        <!-- Batas Nama -->
+
+        <!-- NIM -->
+        <div class="form-group row">
+            <label for="nim" class="col-sm-2">NIM: *</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="text" formControlName="nim">
+                <!-- jika error maka muncul -->
+                <div class="alert alert-warning" role="alert" *ngIf="form.controls['nim'].touched && !form.controls['nim'].valid">
+                    <div *ngIf="form.controls['nim'].errors?.required">Atribut nim harus diisi</div>
+                    <div *ngIf="form.controls['nim'].errors?.maxlength && !form.controls['nim'].errors?.pattern">Atribut nim harus maksimal 8 angka</div>
+                    <div *ngIf="form.controls['nim'].errors?.pattern">NIM tak valid</div>
+                </div>
+            </div>
+        </div>
+
+        <!--  Fakultas  -->
+        <div class="form-group row">
+            <label for="f" class="col-sm-2">Fakultas: *</label>
+            <div class="col-sm-10">
+                <select class="form-control" formControlName="faculty">
+                    <option disabled>Select</option>
+                    <option *ngFor="let f of faculties" [value]="f">{{f}}</option>
+                </select>
+                <div class="alert alert-warning" role="alert" *ngIf="form.controls['faculty'].errors?.required && form.controls['faculty'].touched">
+                    Atribut Faculty harus diisi
+                </div>
+            </div>
+        </div>
+
+        <!-- Entry Date -->
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Entry Date: *</label>
+            <div class="col-sm-10">
+            <input type="date" class="form-control" formControlName="entryDate">
+                <div class="alert alert-warning" role="alert" 
+                    *ngIf="form.controls['entryDate'].errors?.required && form.controls['entryDate'].touched">
+                    Entry date is required
+                </div>
+            </div>
+        </div>
+
+        <!-- Birth Date -->
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Birth Date: *</label>
+            <div class="col-sm-10">
+            <input type="date" class="form-control" formControlName="birthDate">
+                <div class="alert alert-warning" role="alert" 
+                    *ngIf="form.controls['birthDate'].errors?.required && form.controls['birthDate'].touched">
+                    Birth date is required
+                </div>
+            </div>
+        </div>
+
+        <!-- Address -->
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Address: </label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="address">
+            </div>
+        </div>
+
+        <!-- Notes -->
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Notes: </label>
+            <div class="col-sm-10">
+                <textarea class="form-control" rows="5" formControlName="notes"></textarea>
+            </div>
+        </div>
+
+        <!-- Phone Number -->
+        <div class="form-group row">
+            <label class="col-sm-2">Phone:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="phoneNumber" placeholder="+62_______+____">
+                <!-- Jika error maka muncul -->
+                <div class="alert alert-warning" role="alert" *ngIf="form.controls['phoneNumber'].touched && !form.controls['phoneNumber'].valid">
+                    <div *ngIf="form.controls['phoneNumber'].errors?.maxlength && !form.controls['phoneNumber'].errors?.pattern">Atribut phone Number harus maksimal 13 angka</div>
+                    <div *ngIf="form.controls['phoneNumber'].errors?.pattern">Phone Number tak valid</div>
+                </div>
+            </div>
+        </div>
+        <!--  -->
+
+        <!-- E-mail -->
+        <div class="form-group row">
+            <label class="col-sm-2">Email: *</label>
+            <div class="col-sm-10">
+                <input class="form-control" formControlName="email">
+                <div class="alert alert-warning" role="alert" *ngIf="form.controls['email'].errors?.required && form.controls['email'].touched">
+                    Email is required
+                </div>
+                <div class="alert alert-warning" role="alert" *ngIf="form.controls['email'].errors?.email">
+                    Email is invalid
+                </div>
+            </div>
+        </div>
+        <!--  -->
+
+        <!-- CHECKBOX -->
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" formControlName="check">
+            <label class="form-check-label" for="exampleCheck1">Saya setuju dengan syarat dan ketentuan yang berlaku</label>
+        </div>
+            
+        <!-- SUBMIT -->
+        <input type="submit" class="btn btn-primary" value="Submit" [disabled]="form.invalid" />
+    </form>
+    <br><br>
+</div>
